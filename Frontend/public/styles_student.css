@@ -1,0 +1,153 @@
+.container {
+    display: flex;
+    background-color: #f2f2f2;
+    min-height: 100vh;
+    font-family: 'Thammasat', sans-serif;
+}
+
+.sidebar {
+    background-color: #d1d1d1;
+    width: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .logo img {
+    width: 250px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.sidebar .profile-pic img {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #cccccc;
+    margin-bottom: 20px;
+}
+
+.sidebar .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.menu button {
+    background-color: #C3002F;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-family: 'Thammasat', sans-serif;
+}
+
+.menu button:hover {
+    background-color: #A30027;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    border-bottom: 2px solid #cccccc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+    border-left: 1px solid #cccccc;
+}
+
+.main-content h2 {
+    color: #d40000;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.main-content .student-id {
+    font-size: 25px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.main-content .form-section {
+    margin-top: 20px;
+}
+
+.form-section .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 150px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.form-group input,
+.form-group select {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    max-width: 300px; 
+}
+
+.form-group input::placeholder {
+    color: #999999;
+}
+
+.name-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.half-group {
+    flex: 1;
+}
+
+.half-group label {
+    display: block;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.half-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+.main-content label[for="first-name"],
+.main-content label[for="last-name"],
+.main-content label[for="first-name-en"],
+.main-content label[for="last-name-en"] {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+    color: #333333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
