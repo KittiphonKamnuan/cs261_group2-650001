@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Thammasat, sans-serif;
+    font-family: 'Thammasat', sans-serif;
     background-color: #f2f2f2;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@ body {
     display: flex;
     max-width: 900px;
     width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     overflow: hidden;
     background-color: white;
@@ -32,7 +32,7 @@ body {
 }
 
 .logo img {
-    max-width: 150px;
+    max-width: 200px;
     margin-bottom: 20px;
 }
 
@@ -53,14 +53,12 @@ h2 {
     display: block;
 }
 
-.input-field input,
-.input-field select {
-    background-color: #D9D9D9;
+.input-field input, .input-field select {
     width: 100%;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .login-btn {
@@ -70,7 +68,7 @@ h2 {
     border: none;
     width: 100%;
     font-size: 16px;
-    border-radius: 20px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

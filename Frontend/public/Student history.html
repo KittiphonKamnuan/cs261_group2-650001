@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ข้อมูลส่วนตัว</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_student.css">
 </head>
 <body>
     <div class="container">
@@ -13,7 +13,7 @@
                 <img src="img/thammasat-logo.png" alt="Thammasat University Logo">
             </div>
             <div class="profile-pic">
-                <img src="img/profile-placeholder.png" alt="Profile Picture">
+                <img src="img/blank-profile-picture-973460_1920.png" alt="Profile Picture">
             </div>
             <div class="menu">
                 <button>ข้อมูลส่วนตัว</button>
@@ -24,6 +24,9 @@
         <div class="main-content">
             <h2>ประวัตินักศึกษา</h2>
             <p class="student-id">66096xxxxx</p>
+            
+            <h3 class="section-title">ข้อมูลส่วนบุคคล</h3>
+            
             <div class="form-section">
                 <div class="form-group">
                     <label for="title">คำนำหน้า</label>
@@ -31,26 +34,34 @@
                         <option value="">เลือก</option>
                     </select>
                 </div>
+
+                <div class="form-group name-group">
+                    <div class="half-group">
+                        <label for="first-name">ชื่อ</label>
+                        <input type="text" id="first-name" placeholder="">
+                    </div>
+                    <div class="half-group">
+                        <label for="last-name">นามสกุล</label>
+                        <input type="text" id="last-name" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group name-group">
+                    <div class="half-group">
+                        <label for="first-name-en">FIRST NAME</label>
+                        <input type="text" id="first-name-en" placeholder="">
+                    </div>
+                    <div class="half-group">
+                        <label for="last-name-en">LAST NAME</label>
+                        <input type="text" id="last-name-en" placeholder="">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="id-number">เลขบัตรประจำตัวประชาชน</label>
                     <input type="text" id="id-number">
                 </div>
-                <div class="form-group">
-                    <label for="first-name">ชื่อ</label>
-                    <input type="text" id="first-name" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="last-name">นามสกุล</label>
-                    <input type="text" id="last-name" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="first-name-en">FIRST NAME</label>
-                    <input type="text" id="first-name-en" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="last-name-en">LAST NAME</label>
-                    <input type="text" id="last-name-en" placeholder="">
-                </div>
+        
                 <div class="form-group">
                     <label for="faculty">คณะ</label>
                     <select id="faculty">

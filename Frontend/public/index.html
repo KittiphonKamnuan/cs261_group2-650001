@@ -13,7 +13,7 @@
                 <img src="img/thammasat-logo.png" alt="Thammasat University Logo">
             </div>
             <h2>SIGN IN</h2>
-            <form>
+            <form id="loginForm">
                 <div class="input-field">
                     <label for="username">USERNAME</label>
                     <input type="text" id="username" placeholder="Enter your username...">
@@ -37,5 +37,26 @@
             <img src="img/brick-wall.jpg" alt="Campus Image">
         </div>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const role = document.getElementById('role').value;
+
+            if (!username || !password || !role) {
+                alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+                return;
+            }
+
+            if (role === 'student') {
+                window.location.href = 'Student history.html';
+            } else if (role === 'lecturer') {
+                window.location.href = 'Lecturer history.html';
+            }
+        });
+    </script>
 </body>
 </html>
