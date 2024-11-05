@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttonText = loginButton.querySelector('.btn-text');
     const spinner = loginButton.querySelector('.spinner');
     const rememberCheckbox = document.getElementById('remember');
+    const capslockWarning = document.getElementById('capslockWarning');
 
     // Error messages in Thai
     const errorMessages = {
@@ -30,6 +31,37 @@ document.addEventListener('DOMContentLoaded', function() {
             error: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'
         }
     };
+
+    // Function to check Caps Lock
+    function checkCapsLock(event) {
+        if (event.getModifierState('CapsLock')) {
+            capslockWarning.classList.add('show');
+        } else {
+            capslockWarning.classList.remove('show');
+        }
+    }
+
+    // Add event listeners for Caps Lock detection
+    passwordInput.addEventListener('keydown', checkCapsLock);
+    passwordInput.addEventListener('keyup', checkCapsLock);
+    passwordInput.addEventListener('mousedown', checkCapsLock);
+    
+    // Check Caps Lock when input gets focus
+    passwordInput.addEventListener('focus', function(e) {
+        checkCapsLock(e);
+    });
+
+    // Hide warning when input loses focus
+    passwordInput.addEventListener('blur', function() {
+        capslockWarning.classList.remove('show');
+    });
+
+    // Also check Caps Lock when window gets focus
+    window.addEventListener('keydown', function(e) {
+        if (document.activeElement === passwordInput) {
+            checkCapsLock(e);
+        }
+    });
 
     // Load saved credentials if they exist
     const savedCredentials = localStorage.getItem('savedCredentials');

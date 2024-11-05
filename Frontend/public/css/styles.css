@@ -382,6 +382,32 @@ body {
     padding-top: 2px;
 }
 
+/* Add to your styles.css */
+.capslock-warning {
+    display: none;
+    position: absolute;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.capslock-warning.show {
+    display: flex;
+}
+
+.capslock-warning img {
+    width: 16px;
+    height: 16px;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
