@@ -2,6 +2,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
+    const usernameInput = document.getElementById('username');
+    const roleSelect = document.getElementById('role');
+    const loginButton = document.querySelector('.login-btn');
+
+    // Function to check if all fields are valid
+    function validateFields() {
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        const role = roleSelect.value;
+
+        // Disable button if any field is empty
+        const isValid = username !== '' && password !== '' && role !== '';
+        loginButton.disabled = !isValid;
+
+        return isValid;
+    }
+
+    // Add input event listeners to all fields
+    usernameInput.addEventListener('input', validateFields);
+    passwordInput.addEventListener('input', validateFields);
+    roleSelect.addEventListener('change', validateFields);
+
+    // Initial validation check
+    validateFields();
 
     // Toggle password visibility
     togglePassword.addEventListener('click', function() {
@@ -22,9 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('passwordError').style.display = 'none';
         document.getElementById('roleError').style.display = 'none';
 
-        const username = document.getElementById('username').value.trim();
+        const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
-        const role = document.getElementById('role').value;
+        const role = roleSelect.value;
 
         let isValid = true;
 
