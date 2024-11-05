@@ -47,39 +47,36 @@
                 <section class="info-section">
                     <h2>ข้อมูลส่วนบุคคล</h2>
                     <div class="form-grid">
-                        <div class="form-group">
-                            <label for="title">คำนำหน้า</label>
-                            <select id="title" disabled>
-                                <option value="">เลือกคำนำหน้า</option>
-                                <option value="mr">นาย</option>
-                                <option value="miss">นางสาว</option>
-                                <option value="mrs">นาง</option>
-                            </select>
+                        <!-- Thai Name Group -->
+                        <div class="name-group-th">
+                            <div class="form-group">
+                                <label for="firstName">ชื่อ</label>
+                                <input type="text" id="firstName" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">นามสกุล</label>
+                                <input type="text" id="lastName" disabled>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="firstName">ชื่อ</label>
-                            <input type="text" id="firstName" disabled>
+                        <!-- English Name Group -->
+                        <div class="name-group-en">
+                            <div class="form-group">
+                                <label for="firstNameEn">First Name</label>
+                                <input type="text" id="firstNameEn" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastNameEn">Last Name</label>
+                                <input type="text" id="lastNameEn" disabled>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="lastName">นามสกุล</label>
-                            <input type="text" id="lastName" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="firstNameEn">First Name</label>
-                            <input type="text" id="firstNameEn" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="lastNameEn">Last Name</label>
-                            <input type="text" id="lastNameEn" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="id-number">เลขบัตรประจำตัวประชาชน</label>
-                            <input type="text" id="id-number" disabled>
+                        <!-- ID Number Group -->
+                        <div class="id-number-group">
+                            <div class="form-group">
+                                <label for="id-number">เลขบัตรประจำตัวประชาชน</label>
+                                <input type="text" id="id-number" disabled>
+                            </div>
                         </div>
                     </div>
                 </section>

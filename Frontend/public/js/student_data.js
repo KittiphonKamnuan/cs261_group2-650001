@@ -58,26 +58,55 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Update profile section
+            // Update profile section with full name
             studentName.textContent = userData.displayNameTH;
             studentId.textContent = userData.username;
 
-            // Populate personal information based on API response format
-            populateFormField('title', userData.displayNameTH.split(' ')[0]);
-            populateFormField('firstName', userData.displayNameTH.split(' ')[1]);
-            populateFormField('lastName', userData.displayNameTH.split(' ')[2] || '');
-            populateFormField('firstNameEn', userData.displayNameEN.split(' ')[0]);
-            populateFormField('lastNameEn', userData.displayNameEN.split(' ')[1] || '');
+            // Populate Thai name (based on API response format)
+            if (userData.firstNameTH && userData.lastNameTH) {
+                populateFormField('firstName', userData.firstNameTH);
+                populateFormField('lastName', userData.lastNameTH);
+            } else {
+                // Fallback: Split displayNameTH if individual fields aren't available
+                const nameParts = userData.displayNameTH.split(' ');
+                if (nameParts.length >= 2) {
+                    populateFormField('firstName', nameParts[0]);
+                    populateFormField('lastName', nameParts[1]);
+                }
+            }
+
+            // Populate English name (based on API response format)
+            if (userData.firstNameEN && userData.lastNameEN) {
+                populateFormField('firstNameEn', userData.firstNameEN);
+                populateFormField('lastNameEn', userData.lastNameEN);
+            } else {
+                // Fallback: Split displayNameEN if individual fields aren't available
+                const nameParts = userData.displayNameEN.split(' ');
+                if (nameParts.length >= 2) {
+                    populateFormField('firstNameEn', nameParts[0]);
+                    populateFormField('lastNameEn', nameParts[1]);
+                }
+            }
             
             // Populate academic information
             populateFormField('faculty', userData.faculty);
             populateFormField('department', userData.department);
+            populateFormField('major', userData.department); // Using department as major if not provided
             populateFormField('status', userData.tuStatus);
             populateFormField('email', userData.email);
+            
+            // Additional fields (if available in the API response)
+            if (userData.studentInfo) {
+                populateFormField('id-number', userData.studentInfo.citizenId);
+                populateFormField('advisor', userData.studentInfo.advisorName);
+                populateFormField('gpax', userData.studentInfo.gpax);
+                populateFormField('phone', userData.studentInfo.phone);
+                populateFormField('address', userData.studentInfo.address);
+            }
 
         } catch (error) {
             console.error('Error loading student data:', error);
-            showErrorModal(error.message || 'ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+            showErrorModal('ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
         } finally {
             toggleLoading(false);
         }
