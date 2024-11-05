@@ -61,6 +61,39 @@ h2 {
     border-radius: 4px;
 }
 
+/* Password field specific styles */
+.password-field {
+    position: relative;
+    width: 100%;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 35px; /* Make room for the eye icon */
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#togglePassword:hover {
+    opacity: 1;
+}
+
+.error-message {
+    color: #d40000;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
 .login-btn {
     padding: 10px;
     background-color: #d40000;
