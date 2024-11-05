@@ -1,4 +1,4 @@
-// Import functions from API.js
+// Import API functions
 import { authenticateWithTUAPI } from './API.js';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.querySelector('.login-btn');
     const buttonText = loginButton.querySelector('.btn-text');
     const spinner = loginButton.querySelector('.spinner');
+    const rememberCheckbox = document.getElementById('remember');
 
     // Error messages in Thai
     const errorMessages = {
@@ -29,6 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
             error: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'
         }
     };
+
+    // Load saved credentials if they exist
+    const savedCredentials = localStorage.getItem('savedCredentials');
+    if (savedCredentials) {
+        const credentials = JSON.parse(savedCredentials);
+        usernameInput.value = credentials.username || '';
+        roleSelect.value = credentials.role || '';
+        rememberCheckbox.checked = true;
+        validateFields(); // Re-validate fields after loading saved data
+    }
 
     // Function to show/hide loading state
     function setLoadingState(isLoading) {
@@ -67,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
-    // Add input event listeners
+    // Add input event listeners to all fields
     usernameInput.addEventListener('input', validateFields);
     passwordInput.addEventListener('input', validateFields);
     roleSelect.addEventListener('change', validateFields);
@@ -100,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let isValid = true;
 
-        // Validation
+        // Username validation
         if (!username) {
             showError('usernameError', errorMessages.username.required);
             isValid = false;
@@ -109,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
 
+        // Password validation
         if (!password) {
             showError('passwordError', errorMessages.password.required);
             isValid = false;
@@ -117,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
 
+        // Role validation
         if (!role) {
             showError('roleError', errorMessages.role.required);
             isValid = false;
@@ -127,16 +140,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 setLoadingState(true);
                 const response = await authenticateWithTUAPI(username, password);
 
-                // Check user type matches selected role
-                if (response.status && 
-                    ((role === 'student' && response.type === 'student') || 
-                     (role === 'lecturer' && response.type === 'employee'))) {
-                    
-                    // Redirect based on role
-                    window.location.href = role === 'student' ? 'Student_history.html' : 'Lecturer_history.html';
-                } else if (response.status) {
-                    // User type doesn't match selected role
-                    showError('roleError', 'กรุณาเลือกสถานะผู้ใช้งานให้ถูกต้อง');
+                if (response.status) {
+                    // Handle "Remember me" functionality
+                    if (rememberCheckbox.checked) {
+                        const credentials = {
+                            username: username,
+                            role: role
+                        };
+                        localStorage.setItem('savedCredentials', JSON.stringify(credentials));
+                    } else {
+                        localStorage.removeItem('savedCredentials');
+                    }
+
+                    // Verify user type matches selected role
+                    if ((role === 'student' && response.type === 'student') || 
+                        (role === 'lecturer' && response.type === 'employee')) {
+                        window.location.href = role === 'student' ? 'Student_history.html' : 'Lecturer_history.html';
+                    } else {
+                        showError('roleError', 'กรุณาเลือกสถานะผู้ใช้งานให้ถูกต้อง');
+                    }
                 } else {
                     showError('passwordError', errorMessages.password.invalid);
                 }
@@ -146,6 +168,33 @@ document.addEventListener('DOMContentLoaded', function() {
             } finally {
                 setLoadingState(false);
             }
+        }
+    });
+
+    // Show error modal function
+    function showErrorModal(message) {
+        const modal = document.getElementById('errorModal');
+        const modalMessage = document.getElementById('modalMessage');
+        modalMessage.textContent = message;
+        modal.style.display = 'flex';
+    }
+
+    // Close modal function
+    window.closeModal = function() {
+        document.getElementById('errorModal').style.display = 'none';
+    };
+
+    // Close modal when clicking outside
+    document.getElementById('errorModal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeModal();
+        }
+    });
+
+    // Close modal with escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
         }
     });
 });
