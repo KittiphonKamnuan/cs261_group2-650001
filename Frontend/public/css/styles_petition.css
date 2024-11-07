@@ -16,7 +16,6 @@
 .petition-grid {
     display: grid;
     grid-template-columns: 1fr; /* ใช้คอลัมน์เดียว */
-    gap: 1.5rem; /* ระยะห่างระหว่างการ์ดแต่ละใบ */
 }
 
 
