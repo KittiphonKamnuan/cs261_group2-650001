@@ -39,13 +39,11 @@
                 <div class="spinner"></div>
                 <p>กำลังโหลดข้อมูล...</p>
             </div>
-
+            <header class="content-header">
+                <h1>ยื่นคำร้อง</h1>
+            </header>
             <!-- Step 1: Select Petition Type -->
             <div id="petitionTypeSection">
-                <header class="content-header">
-                    <h1>เขียนคำร้องออนไลน์</h1>
-                </header>
-
                 <div class="content-body">
                     <div class="petition-list">
                         <div class="petition-category">
@@ -112,14 +110,15 @@
             </div>
 
             <!-- Step 2: Select Submit Method (Initially Hidden) -->
-            <div id="submitMethodSection" style="display: none;">
+            <div id="submitMethodSection" style="display: none;" class="content-submit">
                 <header class="content-header">
                     <div class="section-header">
                         <button id="backButton" class="back-button">
                             <span class="arrow-icon">‹</span>
-                            <span>กลับ</span>
+                            <span>เลือกคำร้องออนไลน์</span>
                         </button>
-                        <h2 id="selectedPetitionTitle"></h2>
+                        <span>|&nbsp;</span>
+                        <span id="selectedPetitionTitle"></span>
                     </div>
                 </header>
 
