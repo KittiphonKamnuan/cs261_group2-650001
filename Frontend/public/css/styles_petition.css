@@ -1,6 +1,8 @@
 /* styles_petition.css */
 .petition-list {
     padding: 1.5rem;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
 }
 
 .petition-category h2 {
@@ -12,19 +14,24 @@
 
 .petition-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 1fr; /* ใช้คอลัมน์เดียว */
+    gap: 1.5rem; /* ระยะห่างระหว่างการ์ดแต่ละใบ */
 }
 
+
 .petition-card {
-    background-color: white;
+    background-color: var(--background-gray);
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     cursor: pointer;
     border: 1px solid var(--border-gray);
+    width: 100%; /* ให้การ์ดใช้ขนาดเต็มของ container ที่มันอยู่ */
+    margin-bottom: 20px; /* เพิ่มระยะห่างด้านล่างระหว่างการ์ดแต่ละอัน */
 }
+
+
 
 .petition-card:hover {
     transform: translateY(-2px);
