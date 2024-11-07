@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             switch(this.textContent) {
                 case 'เขียนคำร้อง':
-                    window.location.href = 'write_petition.html';
+                    window.location.href = 'petition_type.html';
                     break;
                 case 'ตรวจสอบสถานะคำร้อง':
                     window.location.href = 'check_status.html';
