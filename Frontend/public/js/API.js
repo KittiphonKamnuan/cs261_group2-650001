@@ -45,7 +45,7 @@ async function authenticateWithTUAPI(username, password) {
             throw new Error(data.message || 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
         }
 
-        // Store user data in session storage
+        // Store user data in session storage with timestamp
         if (data.status) {
             const userData = {
                 username: data.username,
@@ -61,11 +61,17 @@ async function authenticateWithTUAPI(username, password) {
                 // Employee specific data
                 statusWork: data.StatusWork,
                 statusEmp: data.StatusEmp,
-                organization: data.organization
+                organization: data.organization,
+                // Add timestamp
+                timestamp: new Date().getTime()
             };
 
             sessionStorage.setItem('userData', JSON.stringify(userData));
-            sessionStorage.setItem('authToken', 'authenticated'); // For session management
+            sessionStorage.setItem('authToken', 'authenticated');
+            
+            // Set session expiry time (30 minutes from login)
+            const expiryTime = new Date().getTime() + (30 * 60 * 1000);
+            sessionStorage.setItem('sessionExpiry', expiryTime.toString());
         }
 
         return data;
@@ -75,26 +81,77 @@ async function authenticateWithTUAPI(username, password) {
     }
 }
 
+// Check if session is expired
+function isSessionExpired() {
+    const expiryTime = sessionStorage.getItem('sessionExpiry');
+    if (!expiryTime) return true;
+    
+    const currentTime = new Date().getTime();
+    return currentTime > parseInt(expiryTime);
+}
+
 // Check if user is authenticated
 function isAuthenticated() {
-    return !!sessionStorage.getItem('authToken');
+    if (!sessionStorage.getItem('authToken')) return false;
+    
+    // Check session expiry
+    if (isSessionExpired()) {
+        logout();
+        return false;
+    }
+    
+    return true;
 }
 
 // Get stored user data
 function getUserData() {
     try {
+        if (!isAuthenticated()) {
+            return null;
+        }
+
         const userData = sessionStorage.getItem('userData');
-        return userData ? JSON.parse(userData) : null;
+        if (!userData) return null;
+
+        const parsedData = JSON.parse(userData);
+        
+        // Update session expiry time on data access
+        const newExpiryTime = new Date().getTime() + (30 * 60 * 1000);
+        sessionStorage.setItem('sessionExpiry', newExpiryTime.toString());
+        
+        return parsedData;
     } catch (error) {
         console.error('Error parsing user data:', error);
         return null;
     }
 }
 
+// Enforce session timeout check
+function startSessionTimer() {
+    setInterval(() => {
+        if (isSessionExpired()) {
+            logout();
+        }
+    }, 60000); // Check every minute
+}
+
+// Clear browser history state
+function clearHistoryState() {
+    window.history.pushState(null, '', window.location.href);
+}
+
 // Logout function
 function logout() {
-    sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('userData');
+    // Clear all session data
+    sessionStorage.clear();
+    
+    // Clear history state
+    clearHistoryState();
+    
+    // Add a flag to prevent going back
+    sessionStorage.setItem('logout', 'true');
+    
+    // Redirect to login page
     window.location.href = 'index.html';
 }
 
@@ -104,11 +161,23 @@ function getUserType() {
     return userData?.type || null;
 }
 
+// Handle back button
+window.addEventListener('popstate', function() {
+    if (sessionStorage.getItem('logout') === 'true') {
+        clearHistoryState();
+    }
+});
+
+// Start session timer when module loads
+startSessionTimer();
+
 // Export functions
 export {
     authenticateWithTUAPI,
     isAuthenticated,
     getUserData,
     getUserType,
-    logout
+    logout,
+    isSessionExpired,
+    clearHistoryState
 };
