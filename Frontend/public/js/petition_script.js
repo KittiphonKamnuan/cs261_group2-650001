@@ -75,14 +75,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load User Data
     function loadUserData() {
         try {
-            const userData = getUserData();
-            if (!userData) throw new Error('ไม่พบข้อมูลผู้ใช้');
+            toggleLoading(true);
 
-            studentName.textContent = userData.displayNameTH || 'ไม่พบข้อมูล';
-            studentId.textContent = userData.username || 'ไม่พบข้อมูล';
+            const userData = getUserData();
+            if (!userData) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            if (userData.type !== 'student') {
+                showErrorModal('ไม่มีสิทธิ์เข้าถึงข้อมูล');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Update profile section with full name
+            studentName.textContent = userData.displayNameTH;
+            studentId.textContent = userData.username;
         } catch (error) {
-            console.error('Error loading user data:', error);
-            showErrorModal(error.message);
+            console.error('Error loading student data:', error);
+            showErrorModal('ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+        } finally {
+            toggleLoading(false);
         }
     }
 
