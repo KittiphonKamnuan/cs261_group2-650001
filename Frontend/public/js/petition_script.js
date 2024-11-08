@@ -125,7 +125,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const config = petitionConfig[currentPetitionType];
-        const formUrl = method === 'online' ? config.onlineForm : config.uploadForm;
+        let formUrl;
+        if (method === 'online') {
+            formUrl = config.onlineForm;
+        } else if (method === 'upload') {
+            // Show the file upload section
+            document.querySelector('.upload-section').style.display = 'block';
+            document.querySelector('.submit-options').style.display = 'none';
+            return; // Don't navigate anywhere, just show the upload section
+        } else {
+            showErrorModal('เกิดข้อผิดพลาดในการเลือกวิธีการยื่นคำร้อง');
+            return;
+        }
 
         try {
             // Save current state before navigation
@@ -134,6 +145,21 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = formUrl;
         } catch (error) {
             showErrorModal('เกิดข้อผิดพลาดในการนำทาง');
+        }
+    }
+
+    // File Upload Functionality
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.querySelector('.upload-btn');
+
+    fileInput.addEventListener('change', handleFileUpload);
+    uploadBtn.addEventListener('click', handleFileUpload);
+
+    function handleFileUpload() {
+        const file = fileInput.files[0];
+        if (file) {
+            // Implement file upload logic here
+            console.log('Uploading file:', file.name);
         }
     }
 
@@ -156,12 +182,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Back Button
     backButton.addEventListener('click', () => {
+        // Reset the page to the initial state
+        resetPage();
         showSection(petitionTypeSection, submitMethodSection);
         // Update URL
         const url = new URL(window.location);
         url.searchParams.delete('type');
         window.history.pushState({}, '', url);
     });
+
+    // Browser Navigation Handling
+    window.addEventListener('popstate', () => {
+        // Reset the page to the initial state
+        resetPage();
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type');
+        
+        if (type && petitionConfig[type]) {
+            handlePetitionTypeSelection(type);
+        } else {
+            showSection(petitionTypeSection, submitMethodSection);
+        }
+    });
+
+    function resetPage() {
+        // Reset the page to the initial state
+        document.querySelector('.upload-section').style.display = 'none';
+        document.querySelector('.submit-options').style.display = 'block';
+        currentPetitionType = '';
+    }
 
     // Menu Navigation
     document.querySelectorAll('.menu-btn').forEach(button => {

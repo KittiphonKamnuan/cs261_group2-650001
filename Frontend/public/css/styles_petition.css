@@ -144,3 +144,72 @@
     transform: translateX(-20px);
     transition: all 0.3s ease;
 }
+
+/* styles_petition.css */
+
+/* File Upload Section Styles */
+.upload-section {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--tu-red);
+    background-color: #f0f0f0;
+}
+
+.file-input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.upload-instructions {
+    text-align: center;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.upload-btn {
+    background-color: var(--tu-red);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+    background-color: #c40000;
+}

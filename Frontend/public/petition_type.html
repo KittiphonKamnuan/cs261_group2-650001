@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <!-- Step 2: Select Submit Method (Initially Hidden) -->
+ <!-- Step 2: Select Submit Method (Initially Hidden) -->
             <div id="submitMethodSection" style="display: none;" class="content-submit">
                 <header class="content-header">
                     <div class="section-header">
@@ -138,12 +138,26 @@
 
                         <div class="petition-card" data-method="upload">
                             <div class="card-content">
-                                <h3>อัปโหลดรูปภาพ</h3>
+                                <h3>อัพโหลดรูปภาพ</h3>
                                 <div class="card-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24">
                                         <path d="M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z"/>
                                     </svg>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Section -->
+                    <div class="upload-section" style="display: none;">
+                        <div class="upload-container">
+                            <h3>อัพโหลดไฟล์</h3>
+                            <div class="upload-box">
+                                <input type="file" id="fileInput" class="file-input" />
+                                <div class="upload-instructions">
+                                    <p>คลิกเพื่ออัพโหลดไฟล์</p>
+                                </div>
+                                <button class="upload-btn">อัพโหลด</button>
                             </div>
                         </div>
                     </div>
