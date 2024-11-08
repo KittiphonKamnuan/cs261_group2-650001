@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load user data from API
-    // Load user data from API
 async function loadUserData() {
     try {
         toggleLoading(true);
