@@ -296,3 +296,42 @@
     color: #333;
     white-space: nowrap;
 }
+
+.graduation-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.graduation-info .semester-input,
+.graduation-info .year-input {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.graduation-info span {
+    color: #333;
+    white-space: nowrap;
+}
+
+.major-options .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.major-options .major-detail {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.major-detail:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
